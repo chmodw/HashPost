@@ -12,7 +12,19 @@
 }
 
 .post{
-    -webkit-box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.75);
+
+}
+
+#post-loading-container{
+    text-align: center;
+}
+
+#post-loading-container > img{
+    height: 100px;
+    width: 100px;
+}
+
+#savePost-loading{
+    display: none;
+    height: 40px;
 }

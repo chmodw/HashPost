@@ -5,9 +5,10 @@ contract Posts{
     /**
         Post struct
      */
-    struct post{
+    struct Post{
         string heading;
         string content;
+        address postedBy;
         string postedOn;
     }
 
@@ -16,22 +17,16 @@ contract Posts{
     /**
         Store posts in a mapping
      */
-    mapping(address => post[]) public postsMap;
+    mapping(uint => Post) public postsMap;
 
     /**
         Create new Post
      */
     function newPost(string memory heading,string memory content,string memory postedOn) public
     {
-        postsMap[msg.sender].push(post(heading,content,postedOn));
         postsCount++;
-    }
+        postsMap[postsCount] = Post(heading,content,msg.sender,postedOn);
 
-    /**
-        functions for get posts and sort them
-     */
-     function getPosts() public view returns(mapping map) {
-         return postsMap;
-     }
+    }
 }
 

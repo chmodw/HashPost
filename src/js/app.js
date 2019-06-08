@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   currentAddress: '',
   contracts: {},
+  postsLoadedTill: 0,
 
   init: async function() {
 
@@ -58,79 +59,98 @@ App = {
       App.contracts.Posts = TruffleContract(Posts);
       // Connect provider to interact with contract
       App.contracts.Posts.setProvider(App.web3Provider);
-
+      
+      //Load posts
+      App.loadPosts();
     });
-
+    // App.listenForEvents();
     return App.bindEvents();
   },
 
+  // listenForEvents: function() {
+  //   App.contracts.Posts.deployed().then(function(instance) {
+  //     instance.votedEvent({}, {
+  //       fromBlock: 0,
+  //       toBlock: 'latest'
+  //     }).watch(function(error, event) {
+  //       console.log("event triggered", event)
+  //       // Reload when a new vote is recorded
+  //       App.loadPosts();
+  //     });
+  //   });
+  // },
+
   bindEvents: function() {
-    // $(document).on('click', '#savePost', App.savePost);
-    $(document).on('click', '#savePost', App.getPosts);
+    $(document).on('click', '#savePost', App.savePost);
+    $(document).on('click', '#load-more-posts', App.loadPosts);
   },
 
   savePost: function(event){
+
+    //Show save post loading
+    $('#savePost-loading').show();
+    //hide the save post btn
+    $('#savePost').hide();
     //stop submitting the form
-    event.preventDefault();
+    event.preventDefault();  
     //get the new post data
     newPostData = $('#newPostForm').serializeArray();
-
-
     // save the post
     App.contracts.Posts.deployed().then(function(instance) {
-      return instance.newPost(newPostData[0].value,newPostData[1].value, Date.now(), { from: App.account });
-    }).then(function(result) {
-      // Wait for votes to update
-      // $("#content").hide();
-      // $("#loader").show();
-      console.log("loading");
+      //save the post
+      instance.newPost(newPostData[0].value,newPostData[1].value, Date.now().toString(), { from: App.account });
+    }).then(function() {
+      //hide save post loading
+      $('#savePost-loading').hide();
+      //show the save post btn
+      $('#savePost').show();
     }).catch(function(err) {
       console.error(err);
     });
 
-    console.log("Saved");
-
     //clear new post form
     document.getElementById('newPostForm').reset();
 
-
-    return App.loadPosts;
-
-
   },
 
-  postCount: function(){
+  loadPosts: function(){
 
-      App.contracts.Posts.deployed().then(function(instance) {
-        return instance.postsCount();
-      }).then(function(result) {
-        console.log(result);
-      }).catch(function(err) {
-        console.error(err);
-      });
-  
+    App.contracts.Posts.deployed().then(function(instance) {
+      postsInstance = instance;
+      return postsInstance.postsCount();
+    }).then(function(postsCount) {
+
+   
+      var postsStepper = 1;
+      var postsCount = Number(postsCount) - Number(App.postsLoadedTill);
+      // Loop the posts
+      for (var i = postsCount; 1 <= i; i--) {
+
+        //stop function if 10 posts loaded
+        if(postsStepper === 10){ break; }
+
+        postsInstance.postsMap(i).then(function(result) {
+          //post html
+          var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">'+result[2]+'</h6><p class="card-text">'+result[1]+'</p><a href="#" class="card-link">Card link</a><a href="#" class="card-link">'+result[3]+'</a></div></div>'
+
+          $('#post-container').append(post);
+
+        });
+        console.log(i);
+        postsStepper++;
+        App.postsLoadedTill++;
+      }
+
+    })
   },
-
-  getPosts: function(){
-    
-
-
-      App.contracts.Posts.deployed().then(function(instance) {
-        return instance.postsMap(1);
-      }).then(function(result) {
-        console.log(result);
-      }).catch(function(err) {
-        console.error(err);
-      });
-
-
-  },
-
-
 };
 
 $(function() {
   $(window).load(function() {
     App.init();
+  });
+
+  $(document).ready(function(){
+      
   });
 });

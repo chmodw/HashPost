@@ -53,13 +53,14 @@
                         <h4>New Post</h4>
                         <form action="" id="newPostForm">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="postTitle" id="postTitle" placeholder="Title">
+                                <input type="text" class="form-control" name="postTitle" id="postTitle" placeholder="Title" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control mb-3" name="postContent" id="postContent" style="min-height: 150px" placeholder="Content" rows="3" spellcheck="false"></textarea>
+                                <textarea class="form-control mb-3" name="postContent" id="postContent" style="min-height: 150px" placeholder="Content" rows="3" spellcheck="false" required></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="post-button-container d-flex justify-content-end">
+                                    <img src="images/load.svg" alt="loading" id="savePost-loading"/>
                                     <button type="button" id="savePost" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
@@ -67,103 +68,15 @@
                     
                       </div>
                   
-                  <div class="post-container">
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                          <h4 class="card-title">Post Title</h4>
-                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-                    
-
+                  <div id="post-container">
+<!--                     
+                    <div id="post-loading-container">
+                      <img src="images/load.svg" alt="loading"/>
+                    </div> -->
                       
                   </div>
                   <div class="more-post-container mb-4 mt-4">
-                      <button type="button" class="btn btn-primary btn-lg btn-block">Load More Posts</button>
+                      <button type="button" class="btn btn-primary btn-lg btn-block" id="load-more-posts">Load More Posts</button>
                   </div>
                 </div>
           </div>
