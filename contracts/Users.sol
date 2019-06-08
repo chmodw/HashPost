@@ -6,6 +6,7 @@ contract Users{
         string username;
         string password;
         string createdOn;
+        bool isActive;
     }
     /**
         Store users of the website
@@ -18,10 +19,16 @@ contract Users{
     mapping(address => address[]) userFollowers;
 
     /**
+        Remember the user count
+     */
+     uint public userCount;
+
+    /**
         add new user
      */
-    function newUser(string memory username, string memory password, string memory createdOn) public {
-        users[msg.sender] = user(username,password,createdOn);
+    function newUser(string memory username, string memory password, string memory createdOn) public{
+        users[msg.sender] = user(username,password,createdOn, true);
+        userCount++;
     }
     /**
         get a user detials 

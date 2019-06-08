@@ -10,6 +10,8 @@ contract Posts{
         string content;
         string postedOn;
     }
+
+    uint public postsCount;
     
     /**
         Store posts in a mapping
@@ -19,12 +21,17 @@ contract Posts{
     /**
         Create new Post
      */
-    function newPost(string memory heading,string memory content,string memory postedOn) public{
+    function newPost(string memory heading,string memory content,string memory postedOn) public
+    {
         postsMap[msg.sender].push(post(heading,content,postedOn));
+        postsCount++;
     }
 
     /**
         functions for get posts and sort them
      */
+     function getPosts() public view returns(mapping map) {
+         return postsMap;
+     }
 }
 

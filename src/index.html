@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Pete's Pet Shop</title>
+    <title>HashPost</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,33 +19,153 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
-          <h1 class="text-center">Pete's Pet Shop</h1>
-          <hr/>
-          <br/>
-        </div>
-      </div>
 
-      <div id="petsRow" class="row">
-        <!-- PETS LOAD HERE -->
-      </div>
-    </div>
+    <div class="main">
+      <div class="row justify-content-md-center">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
+          <div class="site-content">
+              <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
+                  <div class="container">
+                      <a class="navbar-brand" href="#">HashPost</a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+      
+                      <div class="collapse navbar-collapse" id="navbarColor01">
+                        <ul class="navbar-nav mr-auto">
+                          <li class="nav-item active">
+                            <a class="nav-link" href="">Messsages<span class="sr-only">(current)</span></a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" id="addressLink" target="_blank"></a>
+                              </li>
+                          </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                      </div>
+                  </div>
+              </nav>
 
-    <div id="petTemplate" style="display: none;">
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
-          <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
-            <br/><br/>
-            <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
-            <strong>Age</strong>: <span class="pet-age">3</span><br/>
-            <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
-            <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
+                <div class="container">
+                      <div class="card border-light mb-3 p-3 new-post-container">
+                        <h4>New Post</h4>
+                        <form action="" id="newPostForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="postTitle" id="postTitle" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control mb-3" name="postContent" id="postContent" style="min-height: 150px" placeholder="Content" rows="3" spellcheck="false"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="post-button-container d-flex justify-content-end">
+                                    <button type="button" id="savePost" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    
+                      </div>
+                  
+                  <div class="post-container">
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                          <h4 class="card-title">Post Title</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Posted By</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    
+
+                      
+                  </div>
+                  <div class="more-post-container mb-4 mt-4">
+                      <button type="button" class="btn btn-primary btn-lg btn-block">Load More Posts</button>
+                  </div>
+                </div>
           </div>
         </div>
       </div>
@@ -52,10 +173,10 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/custom.js"></script>
   </body>
 </html>
