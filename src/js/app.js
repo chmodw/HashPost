@@ -124,19 +124,18 @@ App = {
       var postsStepper = 1;
       var postsCount = Number(postsCount) - Number(App.postsLoadedTill);
       // Loop the posts
-      for (var i = postsCount; 1 <= i; i--) {
+      for (let i = postsCount; 1 <= i; i--) {
 
         //stop function if 10 posts loaded
         if(postsStepper === 10){ break; }
 
-        postsInstance.postsMap(i).then(function(result) {
+        postsInstance.postsMap(i).then( function(result) {
           //post html
-          var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">'+result[2]+'</h6><p class="card-text">'+result[1]+'</p><a href="#" class="card-link">Card link</a><a href="#" class="card-link">'+result[3]+'</a></div></div>'
+          var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">'+result[2]+'</h6><p class="card-text">'+result[1]+'</p><a href="comments.html?id='+(i)+'" class="card-link">Comments</a><a href="#" class="card-link">Card link</a><a href="#" class="card-link">'+result[3]+'</a></div></div>'
 
           $('#post-container').append(post);
 
         });
-        console.log(i);
         postsStepper++;
         App.postsLoadedTill++;
       }

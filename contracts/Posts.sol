@@ -9,23 +9,45 @@ contract Posts{
         string heading;
         string content;
         address postedBy;
-        string postedOn;
+        uint postedOn;
     }
 
-    uint public postsCount;
+    struct Comment{
+        uint64 postId;
+        string content;
+        address postedBy;
+        uint postedOn;
+    }
+
+    uint64 public postsCount;
+    uint64 public commentsCount;
     
     /**
         Store posts in a mapping
      */
-    mapping(uint => Post) public postsMap;
+    mapping(uint64 => Post) public postsMap;
+    /**
+        Store comments in a mapping
+     */
+    mapping(uint64 => Comment) public commentsMap;
 
     /**
         Create new Post
      */
-    function newPost(string memory heading,string memory content,string memory postedOn) public
+    function newPost(string memory heading,string memory content,uint postedOn) public
     {
         postsCount++;
         postsMap[postsCount] = Post(heading,content,msg.sender,postedOn);
+
+    }
+
+    /**
+        Create new Comment
+     */
+    function newComment(uint64 postId,string memory content,uint postedOn) public
+    {
+        commentsCount++;
+        commentsMap[commentsCount] = Comment(postId,content,msg.sender,postedOn);
 
     }
 }
