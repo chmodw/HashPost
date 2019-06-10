@@ -2,6 +2,11 @@
     background: #f4f4f4;
 }
 
+a:link {
+    color: #3F658F;
+    text-decoration: none;
+  }
+
 .site-content{
     background: #f4f4f4;
     min-height: 100vh;
@@ -31,4 +36,16 @@
 
 .color-primary{
     color: #3F658F;
+}
+
+.new-user-container{
+    margin-top: 75px;
+}
+
+.new-user{
+    /* display: none; */
+}
+
+#user-exists-warning{
+    display: none;
 }

@@ -59,7 +59,15 @@ App = {
       App.contracts.Posts = TruffleContract(Posts);
       // Connect provider to interact with contract
       App.contracts.Posts.setProvider(App.web3Provider);
-      
+    /**
+     * get Users Contract
+     */
+    $.getJSON("Users.json", function(Users) {
+      // Instantiate a new truffle contract from the artifact
+      App.contracts.Users = TruffleContract(Users);
+      // Connect provider to interact with contract
+      App.contracts.Users.setProvider(App.web3Provider);
+    });
       //Load posts
       App.loadPosts();
     });
@@ -130,10 +138,19 @@ App = {
         if(postsStepper === 10){ break; }
 
         postsInstance.postsMap(i).then( function(result) {
+
+          var postUsername;
+
+          App.contracts.Users.deployed().then(function(instance) {
+            return instance.users(result[2]);
+          }).then(function(userResult){
           //post html
-          var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">'+result[2]+'</h6><p class="card-text">'+result[1]+'</p><a href="comments.html?id='+(i)+'" class="card-link">Comments</a><a href="#" class="card-link">Card link</a><a href="#" class="card-link">'+result[3]+'</a></div></div>'
+          var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">Posted by: <a href="/App.html?hash='+result[2]+'">'+userResult[0]+'</a></h6><p class="card-text">'+result[1]+'</p><a href="comments.html?id='+(i)+'" class="card-link">Comments</a><a href="#" class="card-link">Card link</a><a href="#" class="card-link">'+result[3]+'</a></div></div>'
+
 
           $('#post-container').append(post);
+
+          });
 
         });
         postsStepper++;
@@ -153,3 +170,9 @@ $(function() {
       
   });
 });
+
+
+// SEND MESSAGES
+// REFRESH POSTS AND COMMENTS
+// USER PROFILES WITH POSTS
+// LIKES AND DISLIKES USER HEARTS

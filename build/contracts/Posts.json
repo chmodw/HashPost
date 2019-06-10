@@ -2283,12 +2283,12 @@
     "1560057830824": {
       "events": {},
       "links": {},
-      "address": "0x6cefb24f7727e5Daff87D46942E43B76d952223F",
-      "transactionHash": "0x22c79a0862611c3137547d36ad727b526252a74929f6b1d1074c6e04aff05ee3"
+      "address": "0x49C4d1b4C1ab19B48B1f89fc81e814B288cF01Ee",
+      "transactionHash": "0xb4db96ca307c8858f125d1b2680bf665a3e94bfab433c2a4bb02952249b4bf4f"
     }
   },
   "schemaVersion": "3.0.10",
-  "updatedAt": "2019-06-09T11:09:08.785Z",
+  "updatedAt": "2019-06-10T07:20:41.412Z",
   "devdoc": {
     "methods": {}
   },
