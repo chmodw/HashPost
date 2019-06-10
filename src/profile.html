@@ -37,7 +37,7 @@
               <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" href="">Messsages<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" id="messageLink" href="messages.html">Messsages<span class="sr-only">(current)</span></a>
                   <li class="nav-item">
                     <a class="nav-link" href="" id="addressLink" target="_blank"></a>
                   </li>
@@ -54,8 +54,39 @@
           <div class="container">
             <div class="card border-light mb-3 p-3" style="margin-top: 75px;">
              <div id="user-info">
-               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi labore incidunt ex, fugit harum quasi magnam corrupti expedita, reprehenderit ab sequi exercitationem provident delectus quis vel optio cupiditate. Unde, veritatis?
+                 <div class="card bg-light mb-3">
+                     <div class="card-body">
+                         <h4 class="card-title">User Profile</h4>
+                         <div class="container">
+                             <div class="row">
+                                 <div class="col-sm-3"><p>Username : </p></div>
+                                 <div class="col-sm-9"><p id="username"></p></div>
+                             </div>
+                             <div class="row">
+                                 <div class="col-sm-3"><p>Eth Address : </p></div>
+                                 <div class="col-sm-9"><p id="address"></p></div>
+                             </div>
+                             <div class="row">
+                                 <div class="col-sm-3"><p>Country : </p></div>
+                                 <div class="col-sm-9"><p id="country"></p></div>
+                             </div>
+                             <div class="row">
+                                 <div class="col-sm-3"><p>Bio : </p></div>
+                                 <div class="col-sm-9"><p id="bio"></p></div>
+                             </div>
+                             <div class="row">
+                                 <div class="col-sm-3"><p>Joined On : </p></div>
+                                 <div class="col-sm-9"><p id="joinedDate"></p></div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
              </div>
+                <div class="card p-3">
+                    <div id="my-posts">
+                        <h4 class="card-title">Previous Posts</h4>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

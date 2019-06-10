@@ -62,6 +62,8 @@ Profile = {
       Profile.contracts.Posts = TruffleContract(Posts);
       // Connect provider to interact with contract
       Profile.contracts.Posts.setProvider(Profile.web3Provider);
+
+      Profile.loadPosts();
     });
     /**
      * get Users Contract
@@ -71,7 +73,8 @@ Profile = {
         Profile.contracts.Users = TruffleContract(Users);
         // Connect provider to interact with contract
         Profile.contracts.Users.setProvider(Profile.web3Provider);
-        Profile.isUserExists();
+
+        Profile.loadUserInfo();
       });
 
     // Profile.listenForEvents();
@@ -80,37 +83,41 @@ Profile = {
 
 
   bindEvents: function() {
-    $(document).on('click', '#signup', Profile.newUser);
 
-   
   },
 
 
   loadPosts: function(){
 
-  },
+      Profile.contracts.Posts.deployed().then(function(instance) {
+          postsInstance = instance;
+          return postsInstance.postsCount();
+      }).then(function(postsCount) {
 
-  newUser: function(){
-    /**
-     * Save a new user
-     */
-    newUser = $('#new-user').serializeArray();
+          // Loop the posts
+          for (let i = postsCount; 1 <= i; i--) {
+            postsInstance.postsMap(i).then(function(result) {
 
+                if(result[2] == Profile.currentAddress){
+                    console.log(result);
 
-    // save the post
-    Profile.contracts.Users.deployed().then(function(instance) {
-        //save the post
-        instance.newUser(newUser[0].value,newUser[1].value, newUser[2].value, Date.now().toString(), { from: Profile.account });
-      }).then(function() {
-        console.log('user saved');
-      }).catch(function(err) {
-        console.error(err);
-      });
+                    var postedDate = new Date(Number(result[3]));
+                    postedDate = postedDate.getFullYear() + '-' + (postedDate.getMonth() + 1) + '-' + postedDate.getDate() + ' At ' + postedDate.getHours() + ":" + postedDate.getMinutes();
 
+                    let myPost = '<div class="card-body">' +
+                        '           <h4 class="card-title">'+result[0]+'</h4>' +
+                        '           <h6 class="card-subtitle mb-2 text-muted">Posted On: '+postedDate+'</h6>'+
+                        '           <p class="card-text">'+result[1]+'</p>' +
+                        '           <a href="comments.html?id='+i+'" class="card-link">Comments</a>' +
+                        '          </div><hr>';
 
+                    $('#my-posts').append(myPost);
+                }
 
-    Profile.loadNewUserForm();
-    console.log(newUser);
+            });
+          }
+
+      })
   },
 
   isUserExists: function(){
@@ -126,8 +133,26 @@ Profile = {
     
   },
 
-  loadNewUserForm: function(){
- 
+  loadUserInfo: function(){
+
+
+      Profile.contracts.Users.deployed().then(function (instance) {
+          return instance.users(Profile.currentAddress);
+      }).then(function (result) {
+
+          let joinedDate = new Date(Number(result[3]));
+          joinedDate = joinedDate.getFullYear() + '-' + (joinedDate.getMonth() + 1) + '-' + joinedDate.getDate();
+
+          $('#username').text(result[0]);
+          $('#address').text(Profile.currentAddress);
+          $('#country').text(result[1]);
+          $('#bio').text(result[2]);
+          $('#joinedDate').text(joinedDate);
+
+      });
+
+
+
   }
 
 };

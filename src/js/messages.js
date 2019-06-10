@@ -145,10 +145,7 @@ App = {
             return instance.users(result[2]);
           }).then(function(userResult){
           //post html
-            var postedDate = new Date(Number(result[3]));
-            postedDate = postedDate.getFullYear() + '-' + (postedDate.getMonth() + 1) + '-' + postedDate.getDate() + ' At ' + postedDate.getHours() + ":" + postedDate.getMinutes();
-
-            var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">Posted by: <a href="/profile.html?hash='+result[2]+'">'+userResult[0]+'</a></h6><p class="card-text">'+result[1]+'</p><a href="comments.html?id='+(i)+'" class="card-link">Comments</a><a href="#" class="card-link">Card link</a><a class="card-link">'+postedDate+'</a></div></div>'
+          var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">Posted by: <a href="/profile.html?hash='+result[2]+'">'+userResult[0]+'</a></h6><p class="card-text">'+result[1]+'</p><a href="comments.html?id='+(i)+'" class="card-link">Comments</a><a href="#" class="card-link">Card link</a><a href="#" class="card-link">'+result[3]+'</a></div></div>'
 
 
           $('#post-container').append(post);

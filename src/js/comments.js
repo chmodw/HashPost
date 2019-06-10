@@ -69,9 +69,9 @@ Comments = {
     */
     $.getJSON("Users.json", function (Users) {
       // Instantiate a new truffle contract from the artifact
-      App.contracts.Users = TruffleContract(Users);
+      Comments.contracts.Users = TruffleContract(Users);
       // Connect provider to interact with contract
-      App.contracts.Users.setProvider(App.web3Provider);
+      Comments.contracts.Users.setProvider(Comments.web3Provider);
     });
     // Comments.listenForEvents();
     return Comments.bindEvents();
@@ -108,10 +108,16 @@ Comments = {
       var postedDate = new Date(Number(result[3]));
       postedDate = postedDate.getFullYear() + '-' + (postedDate.getMonth() + 1) + '-' + postedDate.getDate() + ' At ' + postedDate.getHours() + ":" + postedDate.getMinutes();
 
-      $('#postedBy').text(result[2]);
-      $('#postedOn').text(postedDate);
-      $('#postTitle').text(result[0]);
-      $('#postContent').text(result[1]);
+      Comments.contracts.Users.deployed().then(function(instance) {
+        return instance.users(result[2]);
+      }).then(function(userResult) {
+
+        $('#postedBy').text(userResult[0]);
+        $('#postedOn').text(postedDate);
+        $('#postTitle').text(result[0]);
+        $('#postContent').text(result[1]);
+
+      });
 
     });
 
@@ -131,9 +137,13 @@ Comments = {
             var postedDate = new Date(Number(result[3]));
             postedDate = postedDate.getFullYear() + '-' + (postedDate.getMonth() + 1) + '-' + postedDate.getDate() + ' At ' + postedDate.getHours() + ":" + postedDate.getMinutes();
 
-            let comment = '<div class="card m-3 border-primary"><div class="card-body"><p class="card-text">' + result[1] + '</p><p><span class="badge badge-primary">By: ' + result[2] + '</span><span class="badge badge-success ml-2">On: ' + postedDate + '</span></p></div></div>';
+            Comments.contracts.Users.deployed().then(function(instance) {
+              return instance.users(result[2]);
+            }).then(function(userResult){
+              let comment = '<div class="card m-3 border-primary"><div class="card-body"><p class="card-text">' + result[1] + '</p><p><span class="badge badge-primary">By: ' + userResult[0] + '</span><span class="badge badge-success ml-2">On: ' + postedDate + '</span></p></div></div>';
 
-            $('#comments-container').append(comment);
+              $('#comments-container').append(comment);
+            });
           }
         });
       }
