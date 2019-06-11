@@ -49,3 +49,7 @@ a:link {
 #user-exists-warning{
     display: none;
 }
+
+.new-message-container{
+    margin-top: 100px;
+}

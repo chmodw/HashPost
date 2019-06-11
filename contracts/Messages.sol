@@ -2,22 +2,26 @@ pragma solidity ^0.5.0;
 
 contract Messages{
     
-    struct message{
-        address sender;
-        string header;
+    struct Message{
+        address from;
+        string to;
+        string title;
         string content;
         string createdOn;
     }
     /**
      *  Messages store in a mapping
      */
-    mapping(address => message[]) public messageMap;
+    mapping(uint => Message) public messageMap;
+
+    uint public messageCount;
 
     /**
      * Send a new message
      */
-    function sendMessage(address sender, string memory header, string memory content, string memory createOn) public{
-        messageMap[msg.sender].push(message(sender,header,content,createOn));
+    function sendMessage(string memory to, string memory title, string memory content, string memory createOn) public{
+        messageCount++;
+        messageMap[messageCount] = Message(msg.sender,to,title,content,createOn);
     }
 
 }
