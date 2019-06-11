@@ -91,6 +91,7 @@ App = {
   bindEvents: function() {
     $(document).on('click', '#savePost', App.savePost);
     $(document).on('click', '#load-more-posts', App.loadPosts);
+
   },
 
   savePost: function(event){
@@ -121,6 +122,7 @@ App = {
 
   },
 
+
   loadPosts: function(){
 
     App.contracts.Posts.deployed().then(function(instance) {
@@ -148,7 +150,19 @@ App = {
             var postedDate = new Date(Number(result[3]));
             postedDate = postedDate.getFullYear() + '-' + (postedDate.getMonth() + 1) + '-' + postedDate.getDate() + ' At ' + postedDate.getHours() + ":" + postedDate.getMinutes();
 
-            var post = '<div class="card mb-3 post"><div class="card-body"><h4 class="card-title">'+result[0]+'</h4><h6 class="card-subtitle mb-2 text-muted">Posted by: <a href="/profile.html?hash='+result[2]+'">'+userResult[0]+'</a></h6><p class="card-text">'+result[1]+'</p><a href="comments.html?id='+(i)+'" class="card-link">Comments</a><a href="#" class="card-link">Card link</a><a class="card-link">'+postedDate+'</a></div></div>'
+            var post = '<div class="card mb-3 post">' +
+                '<div class="card-body">' +
+                '<h4 class="card-title">'+result[0]+'</h4>' +
+                '<h6 class="card-subtitle mb-2 text-muted">Posted by: ' +
+                '<a href="/profile.html?hash='+result[2]+'">'+userResult[0]+'</a>' +
+                '</h6><p class="card-text">'+result[1]+'</p>' +
+                '<a href="comments.html?id='+(i)+'" class="card-link">Comments</a>' +
+                '<span href="" class="card-link">' +
+                '<span class="mr-3"><i class="fas fa-long-arrow-alt-up" class="voteUp"><span' +
+                ' class="upVoteCount">0</span></i></span>' +
+                '<span href=""><i class="fas fa-long-arrow-alt-down" class="voteDown"><span' +
+                ' class="downVoteCount">0</span></i></span>' +
+                '</span><a class="card-link">'+postedDate+'</a></div></div>'
 
 
           $('#post-container').append(post);

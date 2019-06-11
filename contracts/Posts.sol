@@ -19,8 +19,20 @@ contract Posts{
         uint postedOn;
     }
 
+    struct UpVote{
+        uint64 postId;
+        address userAddress;
+    }
+
+    struct DownVote{
+        uint64 postId;
+        address userAddress;
+    }
+
     uint64 public postsCount;
     uint64 public commentsCount;
+    uint64 public upVoteCount;
+    uint64 public downVoteCount;
     
     /**
         Store posts in a mapping
@@ -30,6 +42,10 @@ contract Posts{
         Store comments in a mapping
      */
     mapping(uint64 => Comment) public commentsMap;
+
+    mapping(uint64 => UpVote) public upVotes;
+
+    mapping(uint64 => DownVote) public downVotes;
 
     /**
         Create new Post
@@ -49,6 +65,16 @@ contract Posts{
         commentsCount++;
         commentsMap[commentsCount] = Comment(postId,content,msg.sender,postedOn);
 
+    }
+
+    function voteUp(uint64 postId, address user) public{
+        upVoteCount++;
+        upVotes[upVoteCount] = UpVote(postId, user);
+    }
+
+    function voteDown(uint64 postId) public{
+        downVoteCount++;
+        downVotes[downVoteCount] = DownVote(postId, msg.sender);
     }
 }
 

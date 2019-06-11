@@ -62,6 +62,7 @@ Comments = {
 
       //Load posts
       Comments.loadPost();
+      Comments.loadVotes();
     });
 
     /**
@@ -74,11 +75,56 @@ Comments = {
       Comments.contracts.Users.setProvider(Comments.web3Provider);
     });
     // Comments.listenForEvents();
-    return Comments.bindEvents();
+  },
+
+  loadVotes: function(){
+    var id = new URLSearchParams(window.location.search).get('id');
+
+
+    // Comments.contracts.Posts.deployed().then(function (instance) {
+    //   return instance.upVoteCount();
+    // }).then(function (result) {
+    //   console.log(result);
+    // });
   },
 
   bindEvents: function () {
     $(document).on('click', '#saveComment', Comments.saveComment);
+    $(document).on('click', '#voteUp', Comments.voteUp);
+    $(document).on('click', '#voteDown', Comments.voteDown);
+  },
+
+  voteUp: function(){
+
+    var id = new URLSearchParams(window.location.search).get('id');
+    Comments.contracts.Posts.deployed().then(function (instance) {
+      return instance.voteUp(id, Comments.currentAddress);
+    }).then(function (result) {
+      Comments.loadVotes();
+    });
+
+    Comments.contracts.Posts.deployed().then(function (instance) {
+      return instance.upVoteCount();
+    }).then(function(voteCount){
+
+      for(i=1; i <= voteCount; i++){
+        Comments.contracts.Posts.deployed().then(function (instance) {
+          return instance.upVotes(i);
+        }).then(function(vote){
+          console.log(vote);
+        });
+      }
+
+    });
+    //check for user already voted
+
+    // return;
+
+
+  },
+
+  voteDown: function(){
+    console.log('Hello');
   },
 
   saveComment: function () {
@@ -112,10 +158,14 @@ Comments = {
         return instance.users(result[2]);
       }).then(function(userResult) {
 
-        $('#postedBy').text(userResult[0]);
-        $('#postedOn').text(postedDate);
-        $('#postTitle').text(result[0]);
-        $('#postContent').text(result[1]);
+        if(result[0] != ''){
+          $('#postedBy').text(userResult[0]);
+          $('#postedOn').text(postedDate);
+          $('#postTitle').text(result[0]);
+          $('#postContent').text(result[1]);
+
+          Comments.bindEvents();
+        }
 
       });
 
